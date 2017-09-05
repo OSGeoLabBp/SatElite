@@ -1,0 +1,30 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+	<script src="almanac.js"></script>
+	<script src="trimble.js"></script>
+	<script>
+		$(document).ready(function () {
+			var ta = new TrimbleAlmanac();
+			ta.Download('http://localhost/www_test/almanac.alm');
+			var d = new Date();
+			var prns = ta.GetPrns()
+			var prn;
+			var p;
+			$("#alm").html(d.toString() + "<br />");
+			for (prn of prns) {
+				p = ta.SatPos(prn, d);
+				$("#alm").html($("#alm").html() + "<br />" +
+				String(prn) + ", " + p[0].toFixed(2) + ", " +
+				p[1].toFixed(2) + ", " + p[2].toFixed(2));
+			}
+		});
+	</script>
+</head>
+<body>
+<p>Trimble almanac test</p>
+<div id='alm'>
+</div>
+</body>
+</html>
