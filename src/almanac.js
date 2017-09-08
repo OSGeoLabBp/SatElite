@@ -45,7 +45,7 @@ class Almanac {
 		var leap = Almanac.LeapYear(d.getFullYear()) ? 1 : 0;
 		var yearDay = monthDay[leap][d.getMonth()] + d.getDate();
 		var mjd = Math.floor((d.getFullYear() - 1901) / 4) * 1461 +
-			((d.getFullYear() - 1901) % 4) * 365 + yearDay + JAN11901;
+			((d.getFullYear() - 1901) % 4) * 365 + yearDay - 1 + JAN11901;
 		var fmjd= ((d.getSeconds() / 60.0 + d.getMinutes()) / 60.0 +
 			d.getHours()) / 24.0;
 		var gps_week = Math.floor((mjd - JAN61980) / 7);
