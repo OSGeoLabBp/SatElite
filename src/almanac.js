@@ -24,7 +24,7 @@ class Almanac {
 	}
 
 	/**
-	 * check for leap year 
+	 * check for leap year
 	 * @param {Number} year - year with four digit
 	 * @returns {Boolean} - true if input is leap year
 	 */
@@ -45,7 +45,7 @@ class Almanac {
 		var leap = Almanac.LeapYear(d.getFullYear()) ? 1 : 0;
 		var yearDay = monthDay[leap][d.getMonth()] + d.getDate();
 		var mjd = Math.floor((d.getFullYear() - 1901) / 4) * 1461 +
-			((d.getFullYear() - 1901) % 4) * 365 + yearDay + JAN11901;
+			((d.getFullYear() - 1901) % 4) * 365 + yearDay - 1 + JAN11901;
 		var fmjd= ((d.getSeconds() / 60.0 + d.getMinutes()) / 60.0 +
 			d.getHours()) / 24.0;
 		var gps_week = Math.floor((mjd - JAN61980) / 7);
@@ -63,8 +63,9 @@ class Almanac {
 	/**
 	 * download a text file using ajax
 	 * @param {String} url - url to text file to download
+	 * @param {function} callback - this function run, when tha ajax is done
 	 */
-	Download(url) {
+	Download(url, callback) {
 		var self = this;
 		$.ajax({
 			url: url,
@@ -73,6 +74,7 @@ class Almanac {
 			dataType: 'text'
 		}).done(function(data) {
 			self.Parse(data);
+			callback();
 		}).fail(function(xhr, stat, error) {
 			alert(stat + ' ' + error)	// TODO write log?
 		});
@@ -82,7 +84,7 @@ class Almanac {
 	 * find staellite record by prn
 	 * @param {String} prn - satellite id
 	 * @returns satellite data JSON
-	 */ 
+	 */
 	PrnFind (prn) {
         var id = this.data.find(function (o) { return o.prn == prn;});
 		return id;

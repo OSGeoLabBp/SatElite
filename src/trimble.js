@@ -62,7 +62,7 @@ class TrimbleAlmanac extends Almanac {
 				toa.push(parseFloat(lines[i+7].substr(j * 10, 10)));
 			}
 			for (j = 0; j < nf; j++) {	// inclination
-				inc.push((parseFloat(lines[i+8].substr(j * 10, 10))) + 54.0 * DEG2RAD);
+				inc.push((parseFloat(lines[i+8].substr(j * 10, 10))) * DEG2RAD + 54.0 * DEG2RAD);
 			}
 			for (j = 0; j < nf; j++) {	// rate of right ascension
 				rra.push(parseFloat(lines[i+9].substr(j * 10, 10)) / 1000.0 * DEG2RAD);

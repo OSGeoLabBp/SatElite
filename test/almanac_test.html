@@ -7,18 +7,20 @@
 	<script>
 		$(document).ready(function () {
 			var ta = new TrimbleAlmanac();
-			ta.Download('http://localhost/www_test/almanac.alm');
-			var d = new Date();
-			var prns = ta.GetPrns()
-			var prn;
-			var p;
-			$("#alm").html(d.toString() + "<br />");
-			for (prn of prns) {
-				p = ta.SatPos(prn, d);
-				$("#alm").html($("#alm").html() + "<br />" +
-				String(prn) + ", " + p[0].toFixed(2) + ", " +
-				p[1].toFixed(2) + ", " + p[2].toFixed(2));
-			}
+			//ta.Download('http://localhost/www_test/almanac.alm');
+			ta.Download('http://localhost/SatElite/test/almanac.alm',function(){
+				var d = new Date();
+				var prns = ta.GetPrns()
+				var prn;
+				var p;
+				$("#alm").html(d.toString() + "<br />");
+				for (prn of prns) {
+					p = ta.SatPos(prn, d);
+					$("#alm").html($("#alm").html() + "<br />" +
+					String(prn) + ", " + p[0].toFixed(2) + ", " +
+					p[1].toFixed(2) + ", " + p[2].toFixed(2));
+				}
+			});
 		});
 	</script>
 </head>
